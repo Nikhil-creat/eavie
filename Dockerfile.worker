@@ -1,0 +1,13 @@
+FROM python:3.11-slim AS base
+ENV PYTHONDONTWRITEBYTECODE=1 PYTHONUNBUFFERED=1 PIP_NO_CACHE_DIR=1
+RUN apt-get update && apt-get install -y --no-install-recommends build-essential libpq-dev libgl1 libglib2.0-0 curl \
+    && rm -rf /var/lib/apt/lists/*
+WORKDIR /srv
+COPY requirements.txt .
+# CPU wheels by default; swap index for CUDA builds on GPU hosts
+RUN pip install --extra-index-url https://download.pytorch.org/whl/cpu -r requirements.txt
+COPY app ./app
+RUN useradd -m -u 10001 eavie && mkdir -p /models /data/uploads && chown -R eavie /srv /models /data
+USER eavie
+
+CMD ["celery","-A","app.workers.celery_app","worker","-l","info"]
