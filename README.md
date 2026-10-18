@@ -1,7 +1,7 @@
 # EAVIE — Enterprise Agentic Vision Intelligence Engine
-Backend (FastAPI/LangGraph/CNN/Celery/Docker) + `site/` (GitHub Pages showcase with Groq assistant).
-## Run backend
-cp .env.example .env && docker compose up --build   
-## Deploy site (GitHub Pages)
-Push repo to GitHub -> Settings > Pages > Source: GitHub Actions. Workflow `.github/workflows/pages.yml` publishes `site/`.
-Chatbot: paste free Groq key (console.groq.com) in the widget; stored in browser only.
+Designed & developed by **Nikhil Chary Sriramoju**. MIT licensed. See `docs/ARCHITECTURE.md`, `SECURITY.md`, `CONTRIBUTING.md`.
+
+- Live site: https://nikhil-creat.github.io/eavie/
+- Backend: FastAPI, LangGraph, hybrid RAG, PyTorch CNN, Celery, Redis, Postgres, Prometheus (`docker compose up --build` after `cp .env.example .env`)
+- Site: `site/` is deployed by `.github/workflows/pages.yml` (Settings > Pages > Source: GitHub Actions)
+- Chatbot: paste a free Groq key from console.groq.com into the widget (stored in your browser only)
